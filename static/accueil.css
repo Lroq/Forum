@@ -1,0 +1,486 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'JurassicPark';
+    font-size: 12px;
+    font-weight: normal;
+    text-decoration: none;
+    overflow-x: hidden;
+
+}
+
+@font-face {
+    font-family: 'JurassicPark';
+    src: url('../Ressources/Fonts/Jurassic_Park.woff2') format('woff2');
+    font-weight: normal;
+    font-size: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../Ressources/Fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1,
+h2,
+h3 {
+    color: #ff4500;
+    font-weight: normal;
+    font-size: 5rem;
+    top: 50%;
+    font-family: 'JurassicPark';
+    text-align: center;
+}
+
+#login {
+    color: black;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 4rem;
+}
+
+h1 a,
+h2 a,
+h3 a {
+    color: orangered;
+    /* Keeps the link color yellow */
+    text-decoration: none;
+    /* Removes the underline */
+}
+
+h1 a:visited,
+h2 a:visited,
+h3 a:visited {
+    color: orangered;
+    /* Prevents the color from changing to purple when visited */
+}
+
+.rectangle {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100vh;
+    /* Adjust height as needed */
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+body {
+    transition: filter 0.3s ease;
+    background-color: rgb(47, 47, 47);
+    background-image: url('../Ressources/Images/Jurassic_World_Copilot_2.jpeg');
+    background-size: cover;
+    /* Réduit l'image de fond */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Changez 'repeat' en 'no-repeat' pour éviter la répétition de l'image */
+    background-attachment: fixed;
+    /* Ajoutez cette ligne pour fixer l'image de fond */
+    color: white;
+    z-index: 1;
+    font-size: 2.5rem;
+    font-weight: normal;
+    font-family: 'Roboto';
+}
+
+#blurContainer {
+    transition: filter 1s ease;
+}
+
+.blur {
+    filter: blur(3px);
+    background-color: transparent;
+}
+
+body.blur #blurContainer {
+    filter: blur(3px);
+}
+
+.hidden {
+    display: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    display: none;
+}
+
+.navbar {
+    position: fixed;
+    background-color: orangered;
+    overflow: hidden;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    padding: 0;
+    top: 0;
+    z-index: 5;
+    font-weight: normal;
+    font-family: 'JurassicPark';
+    text-decoration: none;
+    font-weight: normal;
+    font-family: 'JurassicPark';
+    text-decoration: none;
+}
+
+.navbar select {
+    margin: 1vh;
+}
+
+.search-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.search-container input[type="text"] {
+    width: 100%;
+    height: 4vh;
+    padding: 10px;
+    font-size: 1rem;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+.dropdown_page,
+.dropdown_notif {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown_page {
+    margin-left: 2vh;
+    width: 10vh;
+    width: 10vh;
+}
+
+.dropdown_notif {
+    margin-right: 2vh;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 20%;
+    height: 700px;
+    /* Ajustez la hauteur selon vos besoins */
+    background-image: url('../Ressources/Images/Ancient_Stele_Copilot_5.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+    padding: 20px;
+    margin-top: 1vh;
+    /* Ajustement pour monter la sidebar */
+    z-index: 2;
+    backdrop-filter: orangered;
+}
+
+.sidebar h2 {
+    font-size: 3rem;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-align: center;
+    color: orangered;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#famousForums {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.container {
+    text-align: center;
+    flex-grow: 1;
+    margin-top: 12vh;
+    margin-top: 12vh;
+    z-index: 2;
+    width: 250%;
+    width: 250%;
+    left: 50%;
+}
+
+.content {
+    top: 50%;
+    left: 50%;
+    transform: translate(5%, 0%);
+    z-index: 2;
+    z-index: 2;
+}
+
+.button_top {
+    box-shadow: inset 0px 38px 19px -34px #ff4000;
+    background: linear-gradient(to bottom, #1f2228 5%, #1f2228 100%);
+    background-color: #1f2228;
+    border-radius: 8px;
+    border: 1px solid #ff4000;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: 'Roboto';
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #000000;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+#newPostButton {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-1250%, -20%);
+}
+
+#postForm {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    z-index: 2;
+    margin-top: 3vh;
+    background-color: rgba(215, 74, 23, 0.664);
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    border: solid 0.2vh rgb(255, 255, 255)
+}
+
+.hidden {
+    display: none;
+}
+
+textarea {
+    width: 95%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.upload-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.upload-buttons label {
+    cursor: pointer;
+}
+
+.upload-buttons input[type="file"] {
+    display: none;
+}
+
+#postButton,
+#closeButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+#latestPosts {
+    background-color: #09131f80;
+    width: 120vh;
+    border: solid 0.5vh orangered;
+    padding: 2vh;
+    border-radius: 2vh;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    color: white;
+    font-size: 24px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-120%, 0%);
+}
+
+#latestPosts h2 {
+    font-size: 5rem;
+    font-size: 5rem;
+    margin-bottom: 10px;
+}
+
+#latestPosts table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#latestPosts table,
+#latestPosts td {
+    border: 1px solid #ccc;
+}
+
+#latestPosts td {
+    padding: 10px;
+    text-align: left;
+    height: 50vh;
+    width: 50vh;
+}
+
+#username {
+    display: flex;
+    justify-content: right;
+    font-size: 4rem;
+    font-size: 4rem;
+}
+
+#likebutton {
+    scale: 0.2;
+}
+
+#Glyph {
+    scale: 0.2;
+}
+
+/* Style pour les listes déroulantes */
+select {
+    background-color: white;
+    color: black;
+    font-family: 'JurassicPark';
+    font-size: 2rem;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 1vh;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+select:hover {
+    background-color: darkorange;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 5px orangered;
+}
+
+/* Style pour les options */
+option {
+    background-color: white;
+    color: black;
+    font-family: 'Roboto';
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+/* Style pour les options sélectionnées */
+option:checked {
+    background-color: orangered;
+    color: white;
+}
+
+.buttons {
+    box-shadow: inset 0px 38px 19px -34px #ff4000;
+    background: linear-gradient(to bottom, #1f2228 5%, #1f2228 100%);
+    background-color: #1f2228;
+    border-radius: 8px;
+    border: 1px solid #ff4000;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #000000;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-220%, 0%);
+}
+
+.buttons:hover {
+    background: linear-gradient(to bottom, #303133 5%, #373b4a 100%);
+    background-color: #303133;
+}
+
+.buttons:active {
+    position: relative;
+    top: 1px;
+}
+
+#commentButton {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-330%, -800%);
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+#dislikeButton {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-400%, -20%);
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#likeButton {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-490%, -40%);
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
+#deleteButton {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}

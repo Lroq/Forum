@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/profile_admin.css">
+    <title>Forum/Profile/Admin</title>
+</head>
+<body>
+<div class="rectangle"></div>
+    <div class="navbar">
+        <div class="dropdown_page">
+            <select id="pageSelect">
+                <option value="profile">Profil</option>
+                <option value="home">Accueil</option>
+                <option value="contact">Contact</option>
+                <option value="about">A propos</option>
+            </select>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search.." name="search">
+        </div>
+        <div class="dropdown_notif">
+            <select>
+                <option value="home">Notif</option>
+                <option value="page1">...</option>
+                <option value="page2">...</option>
+                <option value="page3">...</option>
+            </select>
+        </div>
+    </div>
+    <p id="userRole" class="hidden">{{.User.Role}}</p>
+    <div class="admin-content">
+        <h1>Informations du Profil:</h1>
+        <p><u><strong>UUID:</strong> {{.User.UUID}}</p></u>
+        <p><u><strong>Nom d'utilisateur:</strong></u> {{.User.Username}}</p>
+        <p><u><strong>Email:</strong></u> {{.User.Email}}</p>
+        <P><u><strong>Role:</strong></u> {{.User.Role}}</P>
+        <h1>Liste des posts:</h1>
+        <table>
+            <tr>
+                {{range .Posts}}
+                <td>
+                    <p id="postID" name="postID"><u><strong>ID:</strong></u> {{.ID}}</p>
+                    <h3 id="username"><u><strong>Auteur:</strong></u> {{.Username}}</h3>
+                    <h2><a href="/posts/{{.ID}}"><u><strong>Titre:</strong></u> {{.Title}}</a></h2>
+                    <p id="content"><u><strong>Contenu:</strong></u> {{.Content}}</p>
+                    <form id="deletePostForm" action="/delete_post" method="POST">
+                        <input type="hidden" name="postID" value="{{.ID}}">
+                        <button class="buttons" type="submit">Supprimer le Post</button>
+                    </form>
+                </td>
+                {{end}}
+            </tr>
+        </table>
+        </form>
+        <div id="latestUsers">
+        <h1>Liste des utilisateurs:</h1>
+        <table>
+            <tr>
+                {{range .Utilisateurs}}
+                <td>
+                    <p id="userID" name="userUUID"><u><strong>UUID:</strong></u> {{.UUID}}</p>
+                    <h3 id="username"><u><strong>Nom utilisateur:</strong></u> {{.Username}}</h3>
+                    <p id="email"><u><strong>Email:</strong></u> {{.Email}}</p>
+                    <form id="deleteUserForm" action="/delete_user" method="POST">
+                        <input type="hidden" name="userUUID" value="{{.UUID}}">
+                        <button type="submit" class="buttons" style="margin-bottom: 4vh; margin-top: 2vh;">Supprimer l'utilisateur</button>
+                    </form>
+                    <form id="promoteUserForm" action="/promote_user" method="POST">
+                        <input type="hidden" name="userUUID" value="{{.UUID}}">
+                        <button type="submit" class="buttons">Promouvoir Modérateur</button>
+                    </form>
+                </td>
+                {{end}}
+            </tr>
+        </table>
+        </div>
+        <div id="latestModerators">
+            <h1>Liste des moderateurs:</h1>
+            <table>
+                <tr>
+                    {{range .Moderators}}
+                    <td>
+                        <p id="userID" name="userUUID"><u><strong>UUID:</strong></u> {{.UUID}}</p>
+                        <h3 id="username"><u><strong>Nom Utilisateur:</strong></u> {{.Username}}</h3>
+                        <p id="email"><u><strong>Email:</strong></u> {{.Email}}</p>
+                        <form id="deleteUserForm" action="/delete_user" method="POST">
+                            <input type="hidden" name="userUUID" value="{{.UUID}}">
+                            <button type="submit" class="buttons" style="margin-bottom: 4vh; margin-top: 2vh;">Supprimer l'utilisateur</button>
+                        </form>
+                        <form id="promoteUserForm" action="/demote_moderator" method="POST">
+                            <input type="hidden" name="userUUID" value="{{.UUID}}">
+                            <button type="submit" class="buttons">Rétrograder Utilisateur</button>
+                        </form>
+                    </td>
+                    {{end}}
+                </tr>
+            </table>
+            </div>
+            <div id="latestAdmins">
+                <h1>Liste des administrateurs:</h1>
+                <table>
+                    <tr>
+                        {{range .Admins}}
+                        <td>
+                            <p id="userID" name="userUUID"><u><strong>UUID:</strong></u> {{.UUID}}</p>
+                            <p id="username"><u><strong>Nom Utilisateur:</strong></u> {{.Username}}</p>
+                            <p id="email"><u><strong>Email:</strong></u> {{.Email}}</p>
+                        </td>
+                        {{end}}
+                    </tr>
+                </table>
+            </div>
+            <div id="reports">
+                <h1>Signalements:</h1>
+                <table>
+                    <tr>
+                        {{range .Reports}}
+                        <td>
+                            <p id="reportID" name="reportID"><u><strong>ID:</strong></u> {{.ID}}</p>
+                            <p id="moderatorName"><u><strong>Modérateur:</strong></u> {{.ModeratorName}}</p>
+                            <p id="report"><u><strong>Contenu:</strong></u> {{.Content}}</p>
+                            <p><u><strong>Post ID:</strong></u> {{.PostID}}</p>
+                            <p><u><strong>Titre du post :</strong></u> {{.PostTitle}}</p>
+                            <p><u><strong>Contenu du post :</strong></u> {{.PostContent}}</p>
+                            <p><u><strong>Réponse de l'Admin :</strong></u> {{.Response}}</p>
+                            <p><u><strong>Résolu :</strong></u> {{.Resolved}}</p>
+                            <form id="respondReportForm" action="/respond_report" method="POST">
+                                <input type="hidden" name="reportID" value="{{.ID}}">
+                                <textarea id="responseContent" name="responseContent" placeholder="Réponse..."></textarea>
+                                <button type="submit" class="buttons" style="position: relative; top: 0%; left: 0%; transform: translate(20%, 90%); margin-left: 2vh; margin-right: 2vh;">Répondre</button>
+                            </form>
+                            <form id="deleteReportForm" action="/delete_report" method="POST">
+                                <input type="hidden" name="reportID" value="{{.ID}}">
+                                <input type="hidden" name="userRole" value="{{$.User.Role}}">
+                                <button type="submit" class="buttons" style="position: relative; top: 0%; left: 0%; transform: translate(0%, -10%);">Supprimer le Signalement</button>
+                            </form>
+                        </td>
+                        {{end}}
+                    </tr>
+                </table>
+            </div>
+            <div id="createAdminForm">
+                <h1>Creer un Admin</h1>
+                <form id="createAdminForm" action="/create_admin" method="POST">
+                    <label for="username">Nom d'utilisateur:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="password" >Mot de passe:</label>
+                    <input style="margin-bottom: 8vh;" type="password" id="password" name="password" required>
+                    <button type="submit" class="buttons" style="width: 30vh; position: relative; top: 50%;left: 50%; transform: translate(-199%,-30%);">Créer Admin</button>
+                </form>
+            </div>
+        </div>
+    <script src="../script/changePage.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: my-go-app
+    ports:
+      - "80:8080"
+      - "443:8443"
+    networks:
+      - web
+networks:
+  web:
+    external: false

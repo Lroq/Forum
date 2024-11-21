@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/profile_utilisateur.css" />
+    <title>Forum/Profil/Utilisateur</title>
+    <script src="../script/changePage.js"></script>
+    <script src="../script/utilisateur.js" defer></script>
+    <script src="../script/profile.js" defer></script>
+  </head>
+  <body>
+    <div class="rectangle"></div>
+    <div class="navbar">
+      <div class="dropdown_page">
+        <select id="pageSelect">
+          <option value="profile">Profil</option>
+          <option value="home">Accueil</option>
+          <option value="contact">Contact</option>
+          <option value="about">A propos</option>
+        </select>
+      </div>
+      <div class="search-container">
+        <input type="text" placeholder="Search.." name="search" />
+      </div>
+      <div class="dropdown_notif">
+        <select>
+          <option value="home">Notif</option>
+          <option value="page1">...</option>
+          <option value="page2">...</option>
+          <option value="page3">...</option>
+        </select>
+      </div>
+    </div>
+    <div id="background"></div>
+    <p id="userRole" class="hidden">{{.User.Role}}</p>
+    <div class="user-content">
+      <button style="margin-top: 6vh" id="switchTabBtn" class="switchTab">
+        Changer d'onglet
+      </button>
+      <div class="tab-content">
+        <div id="profileTab" class="tab active">
+          <h1>Informations du Profil</h1>
+          <div class="profile">
+            <p id="userID"><u>UUID:</u> {{.User.UUID}}</p>
+            <p id="username"><u>Nom d'utilisateur:</u> {{.User.Username}}</p>
+            <p id="userEmail"><u>Email:</u> {{.User.Email}}</p>
+            <button class="buttons" id="editProfileBtn">
+              Modifier les Informations
+            </button>
+          </div>
+          <div class="edit-profile" id="editProfileForm" style="display: none">
+            <h1>Modifier les Informations</h1>
+            <form id="profileForm" action="/update_profile" method="POST">
+              <label for="username" style="font-size: 24px">Nom: </label>
+              <input
+                style="font-size: 24px"
+                type="text"
+                id="username"
+                name="username"
+                value="{{.User.Username}}"
+                required
+              />
+              <label for="email" style="font-size: 24px">Email: </label>
+              <input
+                style="margin-left: 5vh; margin-bottom: 8vh; font-size: 24px"
+                type="email"
+                id="email"
+                name="email"
+                value="{{.User.Email}}"
+                required
+              />
+              <button class="buttons" type="submit">
+                Enregistrer les modifications
+              </button>
+            </form>
+          </div>
+        </div>
+        <div id="activityTab" class="tab">
+          <h1>Activité</h1>
+          <p><strong>----------------</strong></p>
+          <p>Post :</p>
+          <div id="userPosts"></div>
+          <p><strong>----------------</strong></p>
+          <p>Commentaire :</p>
+          <p><strong>----------------</strong></p>
+          <div id="userComments"></div>
+          <p><strong>----------------</strong></p>
+          <p>Like :</p>
+          <div id="userLikes"></div>
+          <p><strong>----------------</strong></p>
+          <p>Dislike :</p>
+          <div id="userDislikes"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

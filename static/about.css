@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../Ressources/Fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-size: normal;
+}
+
+@font-face {
+    font-family: 'JurassicPark';
+    src: url('../Ressources/Fonts/Jurassic_Park.woff2') format('woff2');
+    font-weight: normal;
+    font-size: normal;
+}
+
+body {
+    transition: filter 0.3s ease;
+    background-color: rgb(47, 47, 47);
+    background-image: url('../Ressources/Images/Jurassic_World_Copilot_2.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'JurassicPark', cursive;
+    text-align: center; /* Centre le texte horizontalement */
+    color: orange; /* Change la couleur du texte en orange */
+    text-shadow: 2px 2px 4px #000; /* Ajoute une ombre noire pour donner de la profondeur */
+    background: url('jungle-background.jpg'); /* Ajoute un fond qui pourrait être une image de jungle */
+    padding: 20px; /* Ajoute de l'espace autour du texte */
+    
+}
+
+.founders-images {
+    display: flex; /* Active Flexbox pour le conteneur */
+    justify-content: center; /* Centre les éléments horizontalement */
+    gap: 20px; /* Ajoute un espace entre les éléments */
+}
+
+.founders-images img {
+    width: 150px; /* Définit une largeur fixe pour toutes les images */
+    height: auto; /* Garde le ratio des images */
+}
+
+.navbar {
+    position: fixed;
+    background-color: orangered;
+    overflow: hidden;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    font-weight: normal;
+    font-family: 'JurassicPark';
+    text-decoration: none;
+    border-radius: 0 0  0.5vh 0.5vh;
+}
+
+h1 {
+    text-decoration: underline;
+    font-weight: normal;
+    color: orangered;
+    font-family: 'JurassicPark';
+    font-size: 12vh;
+}
+
+.rectangle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+.buttons {
+    box-shadow: inset 0px 38px 19px -34px #ff4000;
+    background: linear-gradient(to bottom, #1f2228 5%, #1f2228 100%);
+    background-color: #1f2228;
+    border-radius: 8px;
+    border: 1px solid #ff4000;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #000000;
+    position: relative;
+}
+
+.buttons:hover {
+    background: linear-gradient(to bottom, #303133 5%, #373b4a 100%);
+    background-color: #303133;
+}
+
+.buttons:active {
+    position: relative;
+    top: 1px;
+}
+
+
+
+
+

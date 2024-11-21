@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/post_detail.css">
+    <script src="../script/comment.js"></script>
+    <title>Détail du post</title>
+</head>
+
+<body>
+    <div class="rectangle"></div>
+    <a href="/" class="buttons">Retour</a>
+    <h3 id="username"><u><strong>Auteur:</strong></u> &nbsp;&nbsp;{{.Post.Username}}</h3>
+    <p id="postID" name="postID" class="hidden">{{.Post.ID}}</p>
+    <h1>{{.Post.Title}}</h1>
+    <div id="contentCom">
+        <h3><u><strong>Contenu:</strong></u> &nbsp;&nbsp;{{.Post.Content}}</h3>
+    </div>
+    <section>
+        {{range .Comments}}
+        <div class="comment">
+            <p class="hidden" id="commentID" name="commentID">{{.ID}}</p>
+            <p><u><strong>Auteur:</strong></u> &nbsp;&nbsp;{{.Username}}</p>
+            <p><u><strong>Contenu:</strong></u> &nbsp;&nbsp;{{.Content}}</p>
+            {{ if eq $.User.Role "ADMIN" }}
+            <form class="delete-comment-form" action="/delete_comment" method="POST">
+                <input type="hidden" name="commentID" value="{{.ID}}">
+                <input type="hidden" name="postID" value="{{$.Post.ID}}">
+                <button type="submit" class="buttons">Supprimer le Commentaire</button>
+            </form>
+            {{ end }}
+        </div>
+        {{end}}
+    </section>
+    <form id="commentForm" action="/add-comment" method="POST">
+        <input type="hidden" name="postID" value="{{.Post.ID}}">
+        <textarea name="content" placeholder="Écrire un commentaire.." style="width: 80vh; height: 12vh; background-color: #1f2228; color:white"></textarea>
+        <button id="commentButton" class="buttons" type="submit">Add Comment</button>
+    </form>
+</body>
+
+</html>

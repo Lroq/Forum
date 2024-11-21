@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/profile.css">
+    <title>Forum/Profile</title>
+    <script src="../script/changePage.js"></script>
+    <style>
+        .tab {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="dropdown_page">
+            <select id="pageSelect">
+                <option value="profile">Profil</option>
+                <option value="home">Accueil</option>
+                <option value="contact">Contact</option>
+                <option value="about">A propos</option>
+            </select>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search.." name="search">
+        </div>
+        <div class="dropdown_notif">
+            <select>
+                <option value="home">Notif</option>
+                <option value="page1">...</option>
+                <option value="page2">...</option>
+                <option value="page3">...</option>
+            </select>
+        </div>
+    </div>
+    <h1 style="margin-top: 18vh;">Role: {{.User.Role}}</h1>
+    
+    {{ else if eq .User.Role "utilisateur" }}
+    <div class="user-content">
+        <h2>User Specific Content</h2>
+        <button style="margin-top: 20vh;" id="switchTabBtn">Changer d'onglet</button>
+    <div class="tab-content">
+        <div id="profileTab" class="tab">
+            <h1>Informations du Profil</h1>
+            <div class="profile">
+                <p><strong>ID:</strong> {{.User.ID}}</p>
+                <p><strong>Nom d'utilisateur:</strong> {{.User.Username}}</p>
+                <p><strong>Email:</strong> {{.User.Email}}</p>
+                <p><strong>Mot de passe:</strong> {{.User.HashedPassword}}</p>
+                <button id="editProfileBtn">Modifier les Informations</button>
+            </div>
+            <div class="edit-profile" id="editProfileForm" style="display: none;">
+                <h2>Modifier les Informations</h2>
+                <form id="profileForm" action="/update_profile" method="POST">
+                    <label for="username">Nom d'utilisateur:</label>
+                    <input type="text" id="username" name="username" value="{{.Username}}" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{.Email}}" required>
+                    
+                    <button type="submit">Enregistrer les modifications</button>
+                </form>
+            </div>
+        </div>
+        <div id="activityTab" class="tab">
+            <h1>Activité</h1>
+            <p>Post : </p>
+            <div id="userPosts"></div>
+            <p>Commentaire : </p>
+            <div id="userComments"></div>
+            <p>Like : </p>
+            <div id="userLikes"></div>
+            <p>Dislike : </p>
+            <div id="userDislikes"></div>
+        </div>
+    </div><script src="../script/utilisateur.js"></script>
+    {{ else }}
+    <div class="guest-content">
+        <h2>Guest Specific Content</h2>
+        <p>You cannot acces to this page without being connected !</p>
+    </div>
+    {{ end }}
+    <script src="../script/profile.js"></script>
+</body>
+</html>

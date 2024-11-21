@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/profile_moderator.css" />
+    <title>Profile/Moderator</title>
+    <script src="../script/changePage.js"></script>
+  </head>
+  <body>
+    <div class="rectangle"></div>
+    <div class="navbar">
+      <div class="dropdown_page">
+        <select id="pageSelect">
+          <option value="profile">Profil</option>
+          <option value="home">Accueil</option>
+          <option value="contact">Contact</option>
+          <option value="about">A propos</option>
+        </select>
+      </div>
+      <div class="search-container">
+        <input type="text" placeholder="Search.." name="search" />
+      </div>
+      <div class="dropdown_notif">
+        <select>
+          <option value="home">Notif</option>
+          <option value="page1">...</option>
+          <option value="page2">...</option>
+          <option value="page3">...</option>
+        </select>
+      </div>
+    </div>
+    <p id="userRole" class="hidden">{{.User.Role}}</p>
+    <div class="moderator-content">
+      <h1>Informations du profil</h1>
+      <p id="userID " name="userUUID">
+        <u><strong>UUID:</strong></u> {{.User.UUID}}
+      </p>
+      <p>
+        <u><strong>Nom d'utilisateur:</strong></u> {{.User.Username}}
+      </p>
+      <p>
+        <u><strong>Email:</strong></u> {{.User.Email}}
+      </p>
+      <p>
+        <u><strong>Role:</strong></u> {{.User.Role}}
+      </p>
+      <p>
+        <u><strong>Post signalés:</strong></u>
+      </p>
+      <div id="latestReports">
+        <h1>Signalements:</h1>
+        <table>
+          <tr>
+            {{range .Reports}}
+            <td>
+              <p id="reportID" name="reportID">
+                <u><strong>ID:</strong></u> {{.ID}}
+              </p>
+              <p id="report">
+                <u><strong>Contenu:</strong></u> {{.Content}}
+              </p>
+              <p>
+                <u><strong>Post ID:</strong></u> {{.PostID}}
+              </p>
+              <p>
+                <u><strong>Titre du post: </strong></u> {{.PostTitle}}
+              </p>
+              <p>
+                <u><strong>Contenu du Post: </strong></u> {{.PostContent}}
+              </p>
+              <p>
+                <u><strong>Réponse de l'Admin :</strong></u> {{.Response}}
+              </p>
+              <p>
+                <u><strong>Résolu :</strong></u> {{.Resolved}}
+              </p>
+              <form id="deleteReportForm" action="/delete_report" method="POST">
+                <input type="hidden" name="reportID" value="{{.ID}}" />
+                <input type="hidden" name="userRole" value="{{$.User.Role}}" />
+                <button type="submit" class="buttons">
+                  Supprimer le Signalement
+                </button>
+              </form>
+            </td>
+            {{end}}
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

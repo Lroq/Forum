@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/accueil.css" />
+    <title>Accueil</title>
+    <script src="../script/changePage.js"></script>
+</head>
+
+<body data-logged-in="false">
+    <div class="rectangle"></div>
+    <div id="overlay" class="overlay"></div>
+    <div id="blurContainer">
+        <div class="navbar">
+            <div class="dropdown_page">
+                <select id="pageSelect">
+                    <option value="home">Accueil</option>
+                    <option value="profile">Profil</option>
+                    <option value="contact">Contact</option>
+                    <option value="about">A propos</option>
+                </select>
+            </div>
+            <a style="margin-left: 8vh;color: black;" href="/login">LOG IN </a>
+            <div class="search-container">
+                <input type="text" placeholder="Search.." name="search">
+            </div>
+            <div class="dropdown_notif">
+                <select>
+                    <option value="home">Notif</option>
+                    <option value="page1">...</option>
+                    <option value="page2">...</option>
+                    <option value="page3">...</option>
+                </select>
+            </div>
+        </div>
+        <h2 id="username" name="username" style="margin-top: 12vh;">Bienvenue, {{.User.Username}} !</h2>
+        <div class="main-content">
+            <p id="userRole" class="hidden">{{.User.Role}}</p>
+            <p id="userID" class="hidden">{{.User.UUID}}</p>
+            <div class="content">
+                <header>
+                    <div class="container">
+                        <button id="newPostButton" class="buttons">Nouveau Post</button>
+                        <div id="latestPosts">
+                            <table>
+                                <tr>
+                                    {{range .Posts}}
+                                    <td>
+                                        <p id="postID" class="hidden">{{.ID}}</p>
+                                        <h3 id="username">{{.Username}}</h3>
+                                        <h2 id="postTitle"><a href="/posts/{{.ID}}">{{.Title}}</a></h2>
+                                        <p id="postContent">{{.Content}}</p>
+                                        <p>Like : {{.LikesCount}}</p>
+                                        <p>Dislike : {{.DislikesCount}}</p>
+                                        {{ if ne .Image "" }}
+                                        <img src="/uploads/{{ .Image }}" alt="Post Image" style="max-width: 200px;">
+                                        {{ end }}
+                                        {{ if ne .Gif "" }}
+                                        <img src="/uploads/{{ .Gif }}" alt="Post Gif" style="max-width: 200px;">
+                                        {{ end }}
+                                        <form action="/like" method="POST">
+                                            <input type="hidden" name="postID" value="{{.ID}}">
+                                            <button class="buttons" id="likeButton" type="submit">Like</button>
+                                        </form>
+                                        <form action="/dislike" method="POST">
+                                            <input type="hidden" name="postID" value="{{.ID}}">
+                                            <button class="buttons" id="dislikeButton" type="submit">Dislike</button>
+                                        </form>
+                                        <a href="/posts/{{.ID}}"><button type="button" id="commentButton"
+                                                class="buttons">Comment</button></a>
+                                        {{ if eq $.User.Role "moderator" }}
+                                        <form id="reportForm" action="/send_report" method="POST">
+                                            <input type="hidden" name="postID" value="{{.ID}}">
+                                            <input type="hidden" name="postTitle" value="{{.Title}}">
+                                            <input type="hidden" name="postContent" value="{{.Content}}">
+                                            <input type="hidden" name="userUUID" value="{{$.User.UUID}}">
+                                            <input type="hidden" name="username" value="{{$.User.Username}}">
+                                            <textarea id="reportContent" name="reportContent"
+                                                placeholder="Raison du signalement..."></textarea>
+                                            <button class="buttons" type="submit">Signaler</button>
+                                        </form>
+                                        <form id="deletePostForm" action="/delete_post" method="POST">
+                                            <input type="hidden" name="postID" value="{{.ID}}">
+                                            <button class="buttons" type="submit" id="deleteButton">Supprimer le
+                                                Post</button>
+                                        </form>
+                                        {{ end }}
+                                        {{ if eq $.User.Role "ADMIN" }}
+                                        <form id="deletePostForm" action="/delete_post" method="POST">
+                                            <input type="hidden" name="postID" value="{{.ID}}">
+                                            <button class="buttons" type="submit">Supprimer le Post</button>
+                                        </form>
+                                        {{ end }}
+                                    </td>
+                                </tr>
+                                {{end}}
+                            </table>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <div class="sidebar blur-element">
+                <h2>Sujet Populaire</h2>
+                <ul id="famousForums"></ul>
+            </div>
+        </div>
+        <div id="postForm" class="hidden">
+            <form action="/new_post" method="POST" enctype="multipart/form-data">
+                <textarea style="background-color: #1f2228; color: white;" id="title" name="title" placeholder="Title.."
+                    required></textarea>
+                <textarea style="background-color: #1f2228; color: white;" id="postContent" name="postContent"
+                    placeholder="TEXT ..." required></textarea>
+                <div class="upload-buttons">
+                    <label for="imageUpload">
+                        <img src="path/to/your/image_icon.png" alt="Upload Image" />
+                    </label>
+                    <input type="file" id="imageUpload" name="image" accept="image/*" onchange="previewImage(event)">
+                    <div id="imagePreview"></div>
+                    <label for="gifUpload">
+                        <img src="path/to/your/gif_icon.png" alt="Upload GIF" />
+                    </label>
+                    <input type="file" id="gifUpload" name="gif" accept="image/webp" onchange="previewGif(event)">
+                    <div id="gifPreview"></div>
+                </div>
+                <button type="submit" id="postButton">POST</button>
+            </form>
+            <button type="button" id="closeButton">Close</button>
+        </div>
+    </div>
+
+
+    <script src="../script/accueil.js"></script>
+    <script src="../script/imageGif.js"></script>
+    <script src="../script/ws.js"></script>
+    <script src="../script/post.js"></script>
+    <script src="../script/search.js"></script>
+</body>
+
+</html>
